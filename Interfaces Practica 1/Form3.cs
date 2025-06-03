@@ -12,10 +12,10 @@ namespace Interfaces_Practica_1
 {
     public partial class Form3 : Form
     {
-        private readonly RepositorioProyectos repo;
+        private readonly IRepositorios<Proyecto> repo;
         private readonly bool esEdicion;
 
-        public Form3(RepositorioProyectos repositorio, Proyecto proyectoExistente = null)
+        public Form3(IRepositorios<Proyecto> repositorio, Proyecto proyectoExistente = null)
         {
             InitializeComponent();
             repo = repositorio;

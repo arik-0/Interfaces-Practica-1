@@ -138,7 +138,7 @@ namespace Interfaces_Practica_1
         }
 
 
-        private RepositorioProyectos repoProyectos = new RepositorioProyectos();
+        private IRepositorios<Proyecto> repoProyectos = new RepositorioProyectos();
 
 
 
