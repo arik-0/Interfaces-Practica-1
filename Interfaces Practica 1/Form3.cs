@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Interfaces_Practica_1
 {
-    public partial class Form3: Form
+    public partial class Form3 : Form
     {
         private readonly RepositorioProyectos repo;
         private readonly bool esEdicion;
@@ -39,17 +39,6 @@ namespace Interfaces_Practica_1
                 MessageBox.Show("Ingrese un nombre de proyecto válido.");
                 return;
             }
-
-            if (esEdicion)
-            {
-                var proyecto = repo.Listar().FirstOrDefault(p => p.Nombre == nombre);
-                if (proyecto != null)
-                {
-                    proyecto.FechaFin = fechaFin;
-                    MessageBox.Show("Proyecto modificado.");
-                    this.DialogResult = DialogResult.OK;
-                }
-            }
             else
             {
                 var nuevo = new Proyecto { Nombre = nombre, FechaFin = fechaFin };
@@ -60,6 +49,20 @@ namespace Interfaces_Practica_1
             }
 
             this.Close();
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            string nombre = txtNombre.Text.Trim();
+            DateTime fechaFin = dtpFechaFin.Value;
+
+            var proyecto = repo.Listar().FirstOrDefault(p => p.Nombre == nombre);
+            if (proyecto != null)
+            {
+                proyecto.FechaFin = fechaFin;
+                MessageBox.Show("Proyecto modificado.");
+                this.DialogResult = DialogResult.OK;
+            }
         }
     }
 }

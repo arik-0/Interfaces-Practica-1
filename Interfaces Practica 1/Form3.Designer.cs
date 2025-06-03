@@ -33,6 +33,7 @@
             crearBtn = new Button();
             dtpFechaFin = new DateTimePicker();
             label1 = new Label();
+            btnModificar = new Button();
             SuspendLayout();
             // 
             // txtNombre
@@ -77,11 +78,22 @@
             label1.TabIndex = 4;
             label1.Text = "Fecha Fin";
             // 
+            // btnModificar
+            // 
+            btnModificar.Location = new Point(197, 243);
+            btnModificar.Name = "btnModificar";
+            btnModificar.Size = new Size(75, 23);
+            btnModificar.TabIndex = 5;
+            btnModificar.Text = "Modificar";
+            btnModificar.UseVisualStyleBackColor = true;
+            btnModificar.Click += btnModificar_Click;
+            // 
             // Form3
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(391, 296);
+            Controls.Add(btnModificar);
             Controls.Add(label1);
             Controls.Add(dtpFechaFin);
             Controls.Add(crearBtn);
@@ -100,5 +112,6 @@
         private Button crearBtn;
         private DateTimePicker dtpFechaFin;
         private Label label1;
+        private Button btnModificar;
     }
 }

@@ -27,6 +27,7 @@ namespace Interfaces_Practica_1
         private GroupBox groupBox2;
         private Button button2;
         private Button button3;
+        private Button btnBorrar;
         private DataGridView dataGridView2;
         public Form2()
         {
@@ -38,10 +39,11 @@ namespace Interfaces_Practica_1
         {
             dataGridView1 = new DataGridView();
             groupBox1 = new GroupBox();
+            btnBorrar = new Button();
+            button3 = new Button();
             button2 = new Button();
             dataGridView2 = new DataGridView();
             groupBox2 = new GroupBox();
-            button3 = new Button();
             ((ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
             ((ISupportInitialize)dataGridView2).BeginInit();
@@ -52,11 +54,13 @@ namespace Interfaces_Practica_1
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(34, 22);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(309, 301);
             dataGridView1.TabIndex = 0;
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(btnBorrar);
             groupBox1.Controls.Add(button3);
             groupBox1.Controls.Add(button2);
             groupBox1.Controls.Add(dataGridView1);
@@ -67,9 +71,29 @@ namespace Interfaces_Practica_1
             groupBox1.TabStop = false;
             groupBox1.Text = "groupBox1";
             // 
+            // btnBorrar
+            // 
+            btnBorrar.Location = new Point(213, 362);
+            btnBorrar.Name = "btnBorrar";
+            btnBorrar.Size = new Size(75, 23);
+            btnBorrar.TabIndex = 3;
+            btnBorrar.Text = "Borrar";
+            btnBorrar.UseVisualStyleBackColor = true;
+            btnBorrar.Click += btnBorrar_Click;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(294, 355);
+            button3.Name = "button3";
+            button3.Size = new Size(75, 23);
+            button3.TabIndex = 2;
+            button3.Text = "Refrescar";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // button2
             // 
-            button2.Location = new Point(51, 362);
+            button2.Location = new Point(19, 362);
             button2.Name = "button2";
             button2.Size = new Size(173, 23);
             button2.TabIndex = 1;
@@ -93,16 +117,6 @@ namespace Interfaces_Practica_1
             groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
             groupBox2.Text = "groupBox2";
-            // 
-            // button3
-            // 
-            button3.Location = new Point(294, 355);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 2;
-            button3.Text = "Refrescar";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
             // 
             // Form2
             // 
@@ -130,24 +144,24 @@ namespace Interfaces_Practica_1
 
         private void InicializarDatos()
         {
-            
 
-           /* var tarea1 = new Tarea
-            {
-                Descripcion = "Diseñar base de datos",
-                Estado = Estado.Iniciado,
-                Prioridad = Prioridad.Alta
-            };
 
-            var tarea2 = new Tarea
-            {
-                Descripcion = "Diseñar interfaz de usuario",
-                Estado = Estado.Iniciado,
-                Prioridad = Prioridad.Media
-            };
+            /* var tarea1 = new Tarea
+             {
+                 Descripcion = "Diseñar base de datos",
+                 Estado = Estado.Iniciado,
+                 Prioridad = Prioridad.Alta
+             };
 
-            proyecto.AgregarTarea(tarea1);
-            proyecto.AgregarTarea(tarea2);*/
+             var tarea2 = new Tarea
+             {
+                 Descripcion = "Diseñar interfaz de usuario",
+                 Estado = Estado.Iniciado,
+                 Prioridad = Prioridad.Media
+             };
+
+             proyecto.AgregarTarea(tarea1);
+             proyecto.AgregarTarea(tarea2);*/
 
             //repoProyectos.Agregar(proyecto);
         }
@@ -212,14 +226,54 @@ namespace Interfaces_Practica_1
         string nombreProyecto = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
         CargarTareas(nombreProyecto);
     }
-}*/public class ProyectoViewModel
-    {
-        public string Nombre { get; set; }
-        public string FechaInicio { get; set; }
-        public string FechaFin { get; set; }
-    }
+}*/
+        public class ProyectoViewModel
+        {
+            public string Nombre { get; set; }
+            public string FechaInicio { get; set; }
+            public string FechaFin { get; set; }
+        }
 
+        private void btnBorrar_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                // Obtener el nombre del proyecto desde la fila seleccionada
+                string nombreProyecto = dataGridView1.SelectedRows[0].Cells["Nombre"].Value?.ToString();
+
+                if (!string.IsNullOrEmpty(nombreProyecto))
+                {
+                    // Buscar el proyecto en la lista
+                    Proyecto proyectoAEliminar = repoProyectos.Listar().FirstOrDefault(p => p.Nombre == nombreProyecto);
+
+                    if (proyectoAEliminar != null)
+                    {
+                        var confirmar = MessageBox.Show(
+                            $"¿Seguro que quieres eliminar el proyecto \"{proyectoAEliminar.Nombre}\"?",
+                            "Confirmar eliminación",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning);
+
+                        if (confirmar == DialogResult.Yes)
+                        {
+                            // Eliminar de la lista
+                            repoProyectos.Eliminar(proyectoAEliminar);
+
+                            // Refrescar el DataGridView
+                            CargarProyectos();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró el proyecto en la lista.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecciona una fila para eliminar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
 
     }
-    
 }

@@ -17,7 +17,8 @@ namespace Interfaces_Practica_1
         {
             if (listaProyectos.Any(p => p.Nombre.Equals(unProyecto.Nombre, StringComparison.OrdinalIgnoreCase)))
             {
-                return "El proyecto ya existe.";
+               // Modificar(unProyecto);
+                return "El proyecto ya existe BRO.";
             }
 
             listaProyectos.Add(unProyecto);
