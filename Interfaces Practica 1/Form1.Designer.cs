@@ -28,80 +28,90 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridView1 = new DataGridView();
-            agregarbtn = new Button();
-            eliminarbtn = new Button();
-            modificarbtn = new Button();
-            textBox1 = new TextBox();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            usuarioTxt = new TextBox();
+            claveTxt = new TextBox();
+            label1 = new Label();
+            label2 = new Label();
+            loginBtn = new Button();
+            mensajeTxt = new Label();
             SuspendLayout();
             // 
-            // dataGridView1
+            // usuarioTxt
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(6, 3);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(330, 406);
-            dataGridView1.TabIndex = 0;
+            usuarioTxt.Location = new Point(67, 78);
+            usuarioTxt.Name = "usuarioTxt";
+            usuarioTxt.Size = new Size(123, 23);
+            usuarioTxt.TabIndex = 0;
             // 
-            // agregarbtn
+            // claveTxt
             // 
-            agregarbtn.Location = new Point(12, 415);
-            agregarbtn.Name = "agregarbtn";
-            agregarbtn.Size = new Size(75, 23);
-            agregarbtn.TabIndex = 1;
-            agregarbtn.Text = "Agregar";
-            agregarbtn.UseVisualStyleBackColor = true;
+            claveTxt.Location = new Point(67, 154);
+            claveTxt.Name = "claveTxt";
+            claveTxt.Size = new Size(123, 23);
+            claveTxt.TabIndex = 1;
             // 
-            // eliminarbtn
+            // label1
             // 
-            eliminarbtn.Location = new Point(174, 415);
-            eliminarbtn.Name = "eliminarbtn";
-            eliminarbtn.Size = new Size(75, 23);
-            eliminarbtn.TabIndex = 2;
-            eliminarbtn.Text = "Eliminar";
-            eliminarbtn.UseVisualStyleBackColor = true;
+            label1.AutoSize = true;
+            label1.Location = new Point(105, 57);
+            label1.Name = "label1";
+            label1.Size = new Size(47, 15);
+            label1.TabIndex = 2;
+            label1.Text = "Usuario";
+            label1.Click += label1_Click;
             // 
-            // modificarbtn
+            // label2
             // 
-            modificarbtn.Location = new Point(93, 415);
-            modificarbtn.Name = "modificarbtn";
-            modificarbtn.Size = new Size(75, 23);
-            modificarbtn.TabIndex = 3;
-            modificarbtn.Text = "Modificar";
-            modificarbtn.UseVisualStyleBackColor = true;
+            label2.AutoSize = true;
+            label2.Location = new Point(110, 133);
+            label2.Name = "label2";
+            label2.Size = new Size(36, 15);
+            label2.TabIndex = 3;
+            label2.Text = "Clave";
             // 
-            // textBox1
+            // loginBtn
             // 
-            textBox1.Location = new Point(369, 15);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 4;
+            loginBtn.Location = new Point(174, 203);
+            loginBtn.Name = "loginBtn";
+            loginBtn.Size = new Size(75, 23);
+            loginBtn.TabIndex = 4;
+            loginBtn.Text = "Login";
+            loginBtn.UseVisualStyleBackColor = true;
+            loginBtn.Click += loginBtn_Click;
+            // 
+            // mensajeTxt
+            // 
+            mensajeTxt.AutoSize = true;
+            mensajeTxt.Location = new Point(37, 193);
+            mensajeTxt.Name = "mensajeTxt";
+            mensajeTxt.Size = new Size(0, 15);
+            mensajeTxt.TabIndex = 5;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(textBox1);
-            Controls.Add(modificarbtn);
-            Controls.Add(eliminarbtn);
-            Controls.Add(agregarbtn);
-            Controls.Add(dataGridView1);
+            ClientSize = new Size(261, 238);
+            Controls.Add(mensajeTxt);
+            Controls.Add(loginBtn);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(claveTxt);
+            Controls.Add(usuarioTxt);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Login";
             Load += Form1_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private DataGridView dataGridView1;
-        private Button agregarbtn;
-        private Button eliminarbtn;
-        private Button modificarbtn;
-        private TextBox textBox1;
+        private TextBox usuarioTxt;
+        private TextBox claveTxt;
+        private Label label1;
+        private Label label2;
+        private Button loginBtn;
+        private Label mensajeTxt;
     }
 }

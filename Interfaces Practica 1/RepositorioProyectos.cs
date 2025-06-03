@@ -1,61 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Interfaces_Practica_1
 {
-    public class RepositorioProyectos : IRepositorios<Usuario>
+    public class RepositorioProyectos : IRepositorios<Proyecto>
     {
-        private List<Usuario> listaProyectos;
+        private readonly List<Proyecto> listaProyectos;
+
         public RepositorioProyectos()
         {
-            listaProyectos = new List<Usuario>();
+            listaProyectos = new List<Proyecto>();
         }
 
-
-        public string Agregar(Usuario unUsuario) //Si no existe agrega la tarea
+        public string Agregar(Proyecto unProyecto)
         {
-            var estaAgregada = listaProyectos.FirstOrDefault(x => x == unUsuario);
-            if (estaAgregada == null)
+            if (listaProyectos.Any(p => p.Nombre.Equals(unProyecto.Nombre, StringComparison.OrdinalIgnoreCase)))
             {
-                listaProyectos.Add(unUsuario);
+                return "El proyecto ya existe.";
             }
-            else { MessageBox.Show("Ya existe papu"); }
 
-            return "";
-        }
-        public string Modificar(Usuario unUsuario)
-        {
-            var index = listaProyectos.FindIndex(x => x.Nombre == unUsuario.Nombre);
-            if (index != -1)
-            {
-                listaProyectos[index] = unUsuario;
-            }
-            else
-            {
-                MessageBox.Show("Usuario no encontrado");
-            }
-            return "";
+            listaProyectos.Add(unProyecto);
+            return "Proyecto agregado correctamente.";
         }
 
-        public string Eliminar(Usuario unUsuario)
+        public string Modificar(Proyecto unProyecto)
         {
-            var usuario = listaProyectos.FirstOrDefault(x => x.Nombre == unUsuario.Nombre);
-            if (usuario != null)
+            var index = listaProyectos.FindIndex(p => p.Nombre.Equals(unProyecto.Nombre, StringComparison.OrdinalIgnoreCase));
+            if (index == -1)
             {
-                listaProyectos.Remove(usuario);
+                return "Proyecto no encontrado.";
             }
-            else
-            {
-                MessageBox.Show("Usuario no encontrado");
-            }
-            return "";
+
+            listaProyectos[index] = unProyecto;
+            return "Proyecto modificado correctamente.";
         }
-        public IReadOnlyCollection<Usuario> Listar()
+
+        public string Eliminar(Proyecto unProyecto)
+        {
+            var proyecto = listaProyectos.FirstOrDefault(p => p.Nombre.Equals(unProyecto.Nombre, StringComparison.OrdinalIgnoreCase));
+            if (proyecto == null)
+            {
+                return "Proyecto no encontrado.";
+            }
+
+            listaProyectos.Remove(proyecto);
+            return "Proyecto eliminado correctamente.";
+        }
+
+        public IReadOnlyCollection<Proyecto> Listar()
         {
             return listaProyectos.AsReadOnly();
         }
+
     }
 }

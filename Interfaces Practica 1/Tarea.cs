@@ -1,27 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Interfaces_Practica_1
 {
-    public class Tarea
+   /* public class Tarea
     {
-        public Tarea() 
+        // Constructor
+        public Tarea()
         {
-            listaUsuarios = new List<Usuario>();
-            estado = Estado.Iniciado;
+            Estado = Estado.Iniciado;
+            ListaUsuarios = new List<Usuario>();
         }
 
-        private string descripcion;
-        private Estado estado;
-        private Prioridad prioridad;
-        private List<Usuario> listaUsuarios;
-        
-        public string Descripcion { get { return descripcion; } set { descripcion = value; } }
+        // Propiedades
+        public string Descripcion { get; set; }
         public Estado Estado { get; set; }
         public Prioridad Prioridad { get; set; }
+        public List<Usuario> ListaUsuarios { get; set; }
     }
 
     public enum Estado
@@ -36,5 +31,5 @@ namespace Interfaces_Practica_1
         Baja,
         Media,
         Alta
-    }
+    }*/
 }
